@@ -1,13 +1,5 @@
 from math import gcd
 
-class DispatchQueues:
-    pass
-
-
-class TaskQueue:
-    pass
-
-
 def lcm(numbers):
     lcm_temp = numbers[0]
     for i in numbers[1:]:
