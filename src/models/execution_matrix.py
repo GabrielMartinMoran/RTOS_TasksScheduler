@@ -3,8 +3,9 @@ from src.models.processor import Processor
 
 class ExecutionMatrix:
 
-    def __init__(self, processors_number: int, hyperperiod: int):
+    def __init__(self, processors_number: int, hyperperiod: int, secondary_period: int):
         self.hyperperiod = hyperperiod
+        self.secondary_period = secondary_period
         self.processors = { x : Processor() for x in range(processors_number)}
 
     def get_last_time_task_started(self, task: Task):

@@ -22,7 +22,7 @@ class CyclicExecutivePlanner(Planner):
         self.secondary_period = secondary_period
 
     def get_plan(self) -> ExecutionMatrix:
-        self.matrix = ExecutionMatrix(self.processors, self.hyperperiod)
+        self.matrix = ExecutionMatrix(self.processors, self.hyperperiod, self.secondary_period)
         print(f'Hyperperiod: {self.hyperperiod}')
         print(f'Secondary period: {self.secondary_period}')
         for x in range(self.hyperperiod):
