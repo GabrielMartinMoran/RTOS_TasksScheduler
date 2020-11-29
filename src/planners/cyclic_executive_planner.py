@@ -17,11 +17,16 @@ class CyclicExecutivePlanner(Planner):
         secondary_period = max([x.compute_time for x in self.tasks])
         while not self.validate_secondary_period(secondary_period):
             secondary_period += 1
+            if secondary_period > self.hyperperiod:
+                raise Exception('Invalid tasks to be planned')
         self.secondary_period = secondary_period
 
     def get_plan(self) -> ExecutionMatrix:
         self.matrix = ExecutionMatrix(self.processors, self.hyperperiod)
+        print(f'Hyperperiod: {self.hyperperiod}')
+        print(f'Secondary period: {self.secondary_period}')
         for x in range(self.hyperperiod):
+            #print(f'Simulating timestamp {x} of hyperperiod')
             for p in range(self.processors):
                 processor = self.matrix.processors[p]
                 processor.add_time_unit()
@@ -43,7 +48,6 @@ class CyclicExecutivePlanner(Planner):
         return self.secondary_period - (time % self.secondary_period)
 
     def validate_secondary_period(self, sp) -> bool:
-        print(f'Probando como periodo secundario {sp}')
         is_valid = False
         for t in self.tasks:
             # 2nd condition
