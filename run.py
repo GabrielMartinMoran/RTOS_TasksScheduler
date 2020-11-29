@@ -3,8 +3,9 @@ from src.models.task import Task
 
 def main():
     TASKS = [
-        Task(20, 8),
-        Task(40, 12)
+        Task("T1", 30, 6),
+        Task("T3", 20, 3),
+        Task("T2", 120, 14),
     ]
     PROCESSORS = 1
     scheduler = Scheduler(TASKS, PROCESSORS)

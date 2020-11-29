@@ -1,7 +1,5 @@
 class Task:
-    def __init__(self , deadline , compute_time):
+    def __init__(self, name, deadline, compute_time):
+        self.name = name
         self.deadline = deadline
         self.compute_time = compute_time
-
-    def run(self):
-        pass
