@@ -1,0 +1,26 @@
+<div class="col-12 task-card">
+    <div class="input-group col-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="taskName"><i class="fas fa-tasks fa-fw"></i>Nombre</label>
+        </div>
+        <input type="text" class="form-control" name="taskName" id="taskName" [(ngModel)]="task.name">
+    </div>
+    <div class="input-group col-4">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="computeTime"><i class="far fa-clock fa-fw"></i>Tiempo de
+                computo</label>
+        </div>
+        <input type="number" class="form-control" name="computeTime" id="computeTime" [(ngModel)]="task.computeTime"
+            min="0">
+    </div>
+    <div class="input-group col-3">
+        <div class="input-group-prepend">
+            <label class="input-group-text" for="deadline"><i class="fas fa-history fa-fw"></i>Deadline</label>
+        </div>
+        <input type="number" class="form-control" name="deadline" id="deadline" [(ngModel)]="task.deadline" min="0">
+    </div>
+    <div class="col-2 text-right">
+        <button type="button" class="btn btn-dark btn-sm" (click)="delete()"><i
+                class="far fa-trash-alt fa-fw"></i>Eliminar</button>
+    </div>
+</div>

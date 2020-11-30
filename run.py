@@ -14,7 +14,7 @@ def main():
         Task("T2", 5, 2),
         Task("T3", 10, 2)
     ]
-    PROCESSORS = 2
+    PROCESSORS = 50
     scheduler = None
     try:
         scheduler = Scheduler(TASKS, PROCESSORS)

@@ -1,0 +1,40 @@
+<br>
+<h1 class="text-center">Planificador de tareas para RTOS</h1>
+<br>
+<h3 class="text-center">Gabriel Martín Moran, Oscar Andrés Arguello</h3>
+<br>
+<form name="form" #form="ngForm" novalidate class="container-fluid m-4">
+  <div class="row col-12">
+    <div class="input-group col-6">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="plannerSelect"><i class="fas fa-cogs fa-fw"></i>Planificador</label>
+      </div>
+      <select class="custom-select" name="plannerSelect" id="plannerSelect" [(ngModel)]="selectedPlanner"
+        (ngModelChange)="onPlannerChange($event)">
+        <option *ngFor="let planner of PLANNERS" [ngValue]="planner">{{ planner.name }}</option>
+      </select>
+    </div>
+    <div class="input-group col-6">
+      <div class="input-group-prepend">
+        <label class="input-group-text" for="processorsNumber"><i
+            class="fas fa-microchip fa-fw"></i>Procesadores</label>
+      </div>
+      <input type="number" class="form-control" name="processorsNumber" id="processorsNumber"
+        [(ngModel)]="scheduler.processors" [disabled]="!canChangeProcessors()" [min]="MIN_PROCESSORS"
+        [max]="MAX_PROCESSORS">
+    </div>
+  </div>
+  <br>
+  <div class="row col-12">
+      <h3 class="col-6" style="display: inline;">Tareas</h3>
+      <span class="col-6 text-right">
+        <button type="button" class="btn btn-outline-dark btn-sm" (click)="addTask()"><i class="fas fa-plus fa-fw"></i>Nueva tarea</button>
+      </span>
+  </div>
+  <div class="m-4">
+    <app-task-card *ngFor="let task of scheduler.tasks" [task]="task" [parent]="this"></app-task-card>
+  </div>
+  <div class="text-center m-4">
+    <button type="button" class="btn btn-outline-dark" (click)="schedule()" [disabled]="form.invalid"><i class="fas fa-rocket fa-fw"></i>Planificar</button>
+  </div>
+</form>

@@ -12,3 +12,6 @@ class Planner:
 
     def get_plan(self):
         pass
+
+    def can_add_task(self, task: Task, time: int) -> bool:
+        return True
