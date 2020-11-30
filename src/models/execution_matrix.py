@@ -3,7 +3,7 @@ from src.models.processor import Processor
 
 class ExecutionMatrix:
 
-    def __init__(self, processors_number: int, hyperperiod: int, secondary_period: int):
+    def __init__(self, processors_number: int, hyperperiod: int, secondary_period: int = None):
         self.hyperperiod = hyperperiod
         self.secondary_period = secondary_period
         self.processors = { x : Processor() for x in range(processors_number)}

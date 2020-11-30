@@ -22,16 +22,17 @@ class Processor:
         last_task = self.get_current_task()
         return (not last_task) or last_task.compute_time <= (len(self.time_units) - self.get_task_last_start_time(last_task))
 
-    def get_current_task(self):
+    def get_current_task(self) -> Task:
         if len(self.time_units) == 0:
             return None
         return self.time_units[len(self.time_units) - 1]
 
-    def get_task_last_start_time(self, task: Task):
+    def get_task_last_start_time(self, task: Task) -> int:
         last_started_time = len(self.time_units) - 1
         found = False
         while last_started_time >= 0:
-            if (self.time_units[last_started_time] == task):
+            if ((self.time_units[last_started_time] is not None) and
+                (self.time_units[last_started_time].task_id == task.task_id)):
                 found = True
             elif found:
                 return last_started_time + 1

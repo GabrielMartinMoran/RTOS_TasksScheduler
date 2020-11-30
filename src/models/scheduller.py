@@ -1,6 +1,7 @@
 from typing import List
 from src.models.task import Task
 from src.planners.cyclic_executive_planner import CyclicExecutivePlanner
+from src.planners.rate_monotonic_planner import RateMonotonicPlanner
 from src.models.execution_matrix_drawer import ExecutionMatrixDrawer
 
 class Scheduler:
@@ -11,7 +12,8 @@ class Scheduler:
 
     def __init__(self, tasks: List[Task], processors: int, sort_criterion= 'FIFO'):
         self.tasks = self.sort_tasks(tasks, sort_criterion)
-        self.planner = CyclicExecutivePlanner(self.tasks, processors)
+        #self.planner = CyclicExecutivePlanner(self.tasks, processors)
+        self.planner = RateMonotonicPlanner(self.tasks, processors)
 
     def schedule(self):
         matrix = self.planner.get_plan()
