@@ -1,5 +1,5 @@
 import os
-from setuptools import setup
+from setuptools import setup, find_packages
 
 # Utility function to read the README file.
 # Used for the long_description.  It's nice, because now 1) we have a top level
@@ -12,16 +12,18 @@ setup(
     name = "str_untref_2020",
     version = "0.0.1",
     author = "Gabriel Moran, Oscar Argueyo",
-    author_email = "MORAN.GABRIEL.95@gmail.com, oaargueyo@gmail.com",
+    author_email = "moran.gabriel.95@gmail.com, oaargueyo@gmail.com",
     description = ("Trabajo practico final de un sistema en tiempo real "),
     license = "BSD",
     keywords = "UNTREF STR",
     url = "https://gitlab.com/str-untref/tp-finaL",
-    packages=['src', 'test'],
+    packages=['src', 'tests'],
     long_description=read('README.md'),
     classifiers=[
         "Development Status :: 0 - Alpha",
         "Topic :: Project",
         "License :: OSI Approved :: BSD License",
     ],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest']
 )

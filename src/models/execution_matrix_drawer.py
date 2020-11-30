@@ -1,5 +1,4 @@
 from src.models.execution_matrix import ExecutionMatrix
-import matplotlib.pyplot as plt
 import os
 import pathlib
 import webbrowser

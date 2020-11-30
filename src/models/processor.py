@@ -29,13 +29,14 @@ class Processor:
 
     def get_task_last_start_time(self, task: Task):
         last_started_time = len(self.time_units) - 1
-        if last_started_time == -1:
-            return -1
-        found = self.time_units[last_started_time] == task
-        while last_started_time > 0:
+        found = False
+        while last_started_time >= 0:
             if (self.time_units[last_started_time] == task):
                 found = True
             elif found:
                 return last_started_time + 1
             last_started_time -= 1
-        return 0 if found else -1
+        if not found and last_started_time == -1:
+            return -1
+        else:
+            return last_started_time + 1
