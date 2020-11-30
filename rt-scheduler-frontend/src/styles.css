@@ -11,6 +11,7 @@ td {
 }
 
 th {
+    text-align: center;
     background: #454545;
     color: white;
 }

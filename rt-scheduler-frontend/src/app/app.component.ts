@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
+import { ExecutionResult } from 'src/models/execution_result';
 import { Planner } from 'src/models/planner';
 import { Scheduler } from 'src/models/scheduler';
 import { Task } from 'src/models/task';
+import { SchedulerService } from './services/scheduler.service';
 
 @Component({
   selector: 'app-root',
@@ -16,26 +18,32 @@ export class AppComponent {
   PLANNERS: Planner[] = [
     {
       name: 'Ejecutivo cíclico',
-      value: 'cyclicExecutive',
+      value: 'CYCLIC_EXECUTIVE',
       maxProcessors: 1
     },
     {
       name: 'Rate monotonic',
-      value: 'rateMonotonic',
+      value: 'RATE_MONOTONIC',
       maxProcessors: -1
     }
   ];
 
   selectedPlanner: Planner = this.PLANNERS[0];
   scheduler: Scheduler;
+  result: ExecutionResult = null;
 
-  constructor() {
+  constructor(private schedulerService: SchedulerService) {
     this.scheduler = new Scheduler();
     this.scheduler.planner = this.selectedPlanner.value;
   }
 
   schedule(): void {
-    console.log(this.scheduler);
+    this.result = null;
+    this.schedulerService.schedule(this.scheduler).subscribe((res) => {
+      this.result = res;
+    }, (err) => {
+      alert(err.error.message);
+    });
   }
 
   onPlannerChange(planner: any): void {

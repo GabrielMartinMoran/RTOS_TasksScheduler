@@ -1,5 +1,5 @@
 from src.utils.lcm import lcm
-
+from src.models.task import Task
 class Planner:
 
     def __init__(self ,tasks=[] , processors = 1):

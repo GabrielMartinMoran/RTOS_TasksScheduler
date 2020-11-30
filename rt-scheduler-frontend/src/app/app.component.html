@@ -26,15 +26,24 @@
   </div>
   <br>
   <div class="row col-12">
-      <h3 class="col-6" style="display: inline;">Tareas</h3>
-      <span class="col-6 text-right">
-        <button type="button" class="btn btn-outline-dark btn-sm" (click)="addTask()"><i class="fas fa-plus fa-fw"></i>Nueva tarea</button>
-      </span>
+    <h3 class="col-6" style="display: inline;">Tareas</h3>
+    <span class="col-6 text-right">
+      <button type="button" class="btn btn-outline-dark btn-sm" (click)="addTask()"><i
+          class="fas fa-plus fa-fw"></i>Nueva tarea</button>
+    </span>
   </div>
   <div class="m-4">
     <app-task-card *ngFor="let task of scheduler.tasks" [task]="task" [parent]="this"></app-task-card>
   </div>
   <div class="text-center m-4">
-    <button type="button" class="btn btn-outline-dark" (click)="schedule()" [disabled]="form.invalid"><i class="fas fa-rocket fa-fw"></i>Planificar</button>
+    <button type="button" class="btn btn-outline-dark" (click)="schedule()" [disabled]="form.invalid"><i
+        class="fas fa-rocket fa-fw"></i>Planificar</button>
+  </div>
+  <div class="m-4" *ngIf="result">
+    <h5>Hiperperíodo: {{ result.hyperperiod }}</h5>
+    <h5 *ngIf="result.secondaryPeriod">Período secundario: {{ result.secondaryPeriod }}</h5>
+    <br>
+    <h3>Planificación</h3>
+    <app-result-table [result]="result" *ngIf="result"></app-result-table>
   </div>
 </form>

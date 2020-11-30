@@ -2,27 +2,18 @@ from typing import List
 from src.models.task import Task
 from src.planners.cyclic_executive_planner import CyclicExecutivePlanner
 from src.planners.rate_monotonic_planner import RateMonotonicPlanner
-from src.models.execution_matrix_drawer import ExecutionMatrixDrawer
 
 class Scheduler:
 
-    SORT_CRITERIA = {
-        'FIFO': None # Default
+    PLANNERS = {
+        'CYCLIC_EXECUTIVE': CyclicExecutivePlanner,
+        'RATE_MONOTONIC': RateMonotonicPlanner
     }
 
-    def __init__(self, tasks: List[Task], processors: int, sort_criterion= 'FIFO'):
-        self.tasks = self.sort_tasks(tasks, sort_criterion)
-        #self.planner = CyclicExecutivePlanner(self.tasks, processors)
-        self.planner = RateMonotonicPlanner(self.tasks, processors)
+    def __init__(self, tasks: List[Task], processors: int, planner: str):
+        self.planner = self.PLANNERS[planner](tasks, processors)
 
     def schedule(self):
-        matrix = self.planner.get_plan()
-        drawer = ExecutionMatrixDrawer()
-        drawer.draw_matrix(matrix)
-
-    def sort_tasks(self, tasks: List[Task], sort_criterion):
-        if sort_criterion in self.SORT_CRITERIA and self.SORT_CRITERIA[sort_criterion]:
-            return self.SORT_CRITERIA[sort_criterion](tasks)
-        return tasks
+        return self.planner.get_plan()
         
         

@@ -1,0 +1,11 @@
+<div style="overflow-x: scroll">
+    <table>
+        <tr>
+            <th *ngFor="let header of getHeaders()">{{ header }}</th>
+        </tr>
+        <tr *ngFor="let i of processorsIndexes()" [style.background-color]="result.processors[i].color">
+            <td *ngFor="let data of getProcessorData(i)">{{ data }}</td>
+        </tr>
+
+    </table>
+</div>
