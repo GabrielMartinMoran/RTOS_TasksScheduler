@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "rt-scheduler-frontend"
+    }
+  },
+  "defaultProject": "rt-scheduler-frontend",
+  "cli": {
+    "analytics": "093c22e4-166a-4f9b-91d3-8293793509f4"
+  }
 }

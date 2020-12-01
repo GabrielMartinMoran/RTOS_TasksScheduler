@@ -42,6 +42,7 @@ export class AppComponent {
     this.schedulerService.schedule(this.scheduler).subscribe((res) => {
       this.result = res;
     }, (err) => {
+      console.log(err);
       alert(err.error.message);
     });
   }

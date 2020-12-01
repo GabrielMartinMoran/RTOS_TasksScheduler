@@ -1,10 +1,15 @@
-<br>
-<h1 class="text-center">Planificador de tareas para RTOS</h1>
-<br>
-<h3 class="text-center">Gabriel Martín Moran, Oscar Andrés Arguello</h3>
-<br>
-<form name="form" #form="ngForm" novalidate class="container-fluid m-4">
-  <div class="row col-12">
+<div class="container">
+	<div class="header-wrapper">
+		<div class="logo">UNTREF - Sistemas de Tiempo Real 2020</div>
+		<div class="title">Planificador de tareas para RTOS</div>
+		<div class="note">
+      <h3 class="text-center">Gabriel Martín Moran, Oscar Andrés Argueyo</h3>
+    </div>
+	</div>
+	<div class="content-wrapper">
+  <div class="table-wrapper">
+  <form name="form" #form="ngForm" novalidate class="container m-12">
+  <div class="row">
     <div class="input-group col-6">
       <div class="input-group-prepend">
         <label class="input-group-text" for="plannerSelect"><i class="fas fa-cogs fa-fw"></i>Planificador</label>
@@ -25,7 +30,7 @@
     </div>
   </div>
   <br>
-  <div class="row col-12">
+  <div class="row">
     <h3 class="col-6" style="display: inline;">Tareas</h3>
     <span class="col-6 text-right">
       <button type="button" class="btn btn-outline-dark btn-sm" (click)="addTask()"><i
@@ -36,7 +41,7 @@
     <app-task-card *ngFor="let task of scheduler.tasks" [task]="task" [parent]="this"></app-task-card>
   </div>
   <div class="text-center m-4">
-    <button type="button" class="btn btn-outline-dark" (click)="schedule()" [disabled]="form.invalid"><i
+    <button type="button" class="btn btn-block btn-outline-dark" (click)="schedule()" [disabled]="form.invalid"><i
         class="fas fa-rocket fa-fw"></i>Planificar</button>
   </div>
   <div class="m-4" *ngIf="result">
@@ -47,3 +52,6 @@
     <app-result-table [result]="result" *ngIf="result"></app-result-table>
   </div>
 </form>
+ </div>
+</div>
+</div>
