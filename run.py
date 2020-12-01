@@ -1,8 +1,12 @@
 #from src.models.scheduller import Scheduler
 #from src.models.task import Task
 from src.server.server import run_server
+import webbrowser
+
+FRONT_END_URL = 'http://localhost:5000'
 
 def main():
+    webbrowser.open(FRONT_END_URL)
     run_server()
     """
     TASKS = [
