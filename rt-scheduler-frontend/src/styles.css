@@ -122,21 +122,22 @@ html, body {
   color: #fff;
 }
 .header-wrapper .title {
-  font-size: 1.6rem;
+  font-size: 0.98rem;
   font-weight: 300;
-  margin-bottom: 15px;
-  margin-top: 40px;
+  margin-bottom: 5px;
+  margin-top: 5px;
 }
 .header-wrapper .note {
   color: #C6C5D1;
   font-weight: 500;
-  font-size: .85rem;
+  font-size: .95rem;
+  margin-top: 55px;
 }
 .header-wrapper .logo {
   color: #FF9081;
   display: -webkit-box;
   display: flex;
-  float: left;
+  float: right;
   font-weight: bold;
   margin-top: -30px;
   text-transform: uppercase;
