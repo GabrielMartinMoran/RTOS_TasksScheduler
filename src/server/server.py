@@ -1,5 +1,5 @@
 from flask import Flask, request, send_from_directory, make_response
-from flask_restful import Api
+from flask_restful import Api , abort
 from flask_cors import CORS
 from src.models.scheduller import Scheduler
 from src.models.task import Task
@@ -16,9 +16,13 @@ def schedule():
     body = request.json
     print(body)
     tasks = [Task(t['name'], t['deadline'], t['computeTime']) for t in body['tasks']]
-    scheduler = Scheduler(tasks, body['processors'], body['planner'])
-    result = scheduler.schedule()
-    return make_response(result.to_dict())
+    try:
+        scheduler = Scheduler(tasks, body['processors'], body['planner'])
+        result = scheduler.schedule()
+        return make_response(result.to_dict())
+    except Exception as e:
+        return abort(400)
+
 
 @app.route('/', methods=['GET'])
 def root():

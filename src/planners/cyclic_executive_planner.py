@@ -3,7 +3,8 @@ from src.models.task import Task
 from typing import List
 from math import gcd, floor
 from src.models.execution_matrix import ExecutionMatrix
-
+import logging
+logger = logging.getLogger(__name__)
 
 class CyclicExecutivePlanner(Planner):
 
@@ -14,7 +15,12 @@ class CyclicExecutivePlanner(Planner):
 
     def calculate_secondary_period(self):
         # 1st contidion
-        secondary_period = max([x.compute_time for x in self.tasks])
+        try:
+            secondary_period = max([x.compute_time for x in self.tasks])
+        except ValueError as e:
+            logger.error("Tasks is empty")
+            secondary_period = 0
+
         while not self.validate_secondary_period(secondary_period):
             secondary_period += 1
             if secondary_period > self.hyperperiod:

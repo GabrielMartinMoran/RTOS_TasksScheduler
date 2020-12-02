@@ -4,7 +4,7 @@ import { Planner } from 'src/models/planner';
 import { Scheduler } from 'src/models/scheduler';
 import { Task } from 'src/models/task';
 import { SchedulerService } from './services/scheduler.service';
-
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -43,7 +43,7 @@ export class AppComponent {
       this.result = res;
     }, (err) => {
       console.log(err);
-      alert(err.error.message);
+      Swal.fire('Scheduler', 'El schedule no pudo realizarse', 'error')
     });
   }
 

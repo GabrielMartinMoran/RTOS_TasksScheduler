@@ -1,3 +1,4 @@
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -16,7 +17,8 @@ import { ResultTableComponent } from './components/result-table/result-table.com
   imports: [
     BrowserModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    SweetAlert2Module.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

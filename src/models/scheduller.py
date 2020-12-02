@@ -15,5 +15,3 @@ class Scheduler:
 
     def schedule(self):
         return self.planner.get_plan()
-        
-        
