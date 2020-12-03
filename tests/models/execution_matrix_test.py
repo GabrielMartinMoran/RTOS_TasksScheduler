@@ -3,5 +3,4 @@ from src.models.processor import Processor
 from src.models.task import Task
 
 def test_init_empty_execution_matrix():
-    processor = Processor()
-    assert processor.time_units == []
+    pass
