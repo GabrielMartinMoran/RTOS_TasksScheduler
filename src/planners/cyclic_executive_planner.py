@@ -8,8 +8,11 @@ logger = logging.getLogger(__name__)
 
 class CyclicExecutivePlanner(Planner):
 
+    MAX_PROCESSORS = 1
+
     def __init__(self, tasks: List[Task], processors: int = 1):
         super().__init__(tasks, processors)
+        self.processors = self.MAX_PROCESSORS
         self.calculate_secondary_period()
         self.matrix = None
 
@@ -29,19 +32,15 @@ class CyclicExecutivePlanner(Planner):
 
     def get_plan(self) -> ExecutionMatrix:
         self.matrix = ExecutionMatrix(self.processors, self.hyperperiod, self.secondary_period)
-        print(f'Hyperperiod: {self.hyperperiod}')
-        print(f'Secondary period: {self.secondary_period}')
-        for x in range(self.hyperperiod):
-            #print(f'Simulating timestamp {x} of hyperperiod')
-            for p in range(self.processors):
-                processor = self.matrix.processors[p]
-                processor.add_time_unit()
-                if not processor.is_free():
-                    continue
-                for t in self.tasks:
-                    if self.can_add_task(t, x):
-                        processor.set_task(t)
-                        break
+        processor = self.matrix.processors[0]
+        for x in range(self.hyperperiod):                
+            processor.add_time_unit()
+            if not processor.is_free():
+                continue
+            for t in self.tasks:
+                if self.can_add_task(t, x):
+                    processor.set_task(t)
+                    break
         return self.matrix
 
     def can_add_task(self, task: Task, time: int):

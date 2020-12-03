@@ -21,7 +21,7 @@ class RateMonotonicPlanner(Planner):
         tasks_to_add = []
         for x in range(self.hyperperiod):
             for t in self.tasks:
-                if self.can_add_task(t, x) and not self.task_in_list(t, tasks_to_add):
+                if self.can_add_task(t, x) and not self.is_task_with_same_id_in_list(t, tasks_to_add):
                     tasks_to_add.append(t)
             tasks_to_add = self.sort_tasks(tasks_to_add)
             for p in range(self.processors):
@@ -48,7 +48,10 @@ class RateMonotonicPlanner(Planner):
         current_deadline = floor(time / task.deadline)        
         return last_executed_deadline < current_deadline
 
-    def task_in_list(self, task: Task, tasks_list: List[Task]) -> bool:
+    """
+    This method compares 'taks_id' property in tasks, not the reference
+    """
+    def is_task_with_same_id_in_list(self, task: Task, tasks_list: List[Task]) -> bool:
         for x in tasks_list:
             if x.task_id == task.task_id:
                 return True
