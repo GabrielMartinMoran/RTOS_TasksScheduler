@@ -13,7 +13,7 @@ class RateMonotonicPlanner(Planner):
         super().__init__(tasks, processors)
 
         if not self.is_planeable():
-            raise Exception("RateMonotonic Algorithm cannot schedule this tasks")
+            print("RateMonotonic no cumple el factor de utilizacion del conjunto de tareas, igual se intentara planificar pero no entraran todas las tareas")
 
         self.matrix = None
 
@@ -22,6 +22,7 @@ class RateMonotonicPlanner(Planner):
         max_threshold = n*(pow(2 , (1/n) ) - 1)
         list_map_task = list(map(lambda t: t.compute_time/t.deadline , self.tasks))
         utilization_factor = functools.reduce(lambda a,b: a+b , list_map_task)
+
         return utilization_factor <= max_threshold
 
 
