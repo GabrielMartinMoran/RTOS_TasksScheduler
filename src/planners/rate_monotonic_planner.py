@@ -45,7 +45,7 @@ class RateMonotonicPlanner(Planner):
     def can_add_task(self, task: Task, time: int) -> bool:
         last_executed_deadline = floor(self.matrix.get_last_time_task_started(task) / task.deadline)
         current_deadline = floor(time / task.deadline)        
-        return last_executed_deadline < current_deadline
+        return last_executed_deadline < current_deadline and self.hyperperiod >= time + task.compute_time
 
     """
     This method compares 'taks_id' property in tasks, not the reference

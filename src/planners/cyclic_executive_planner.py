@@ -21,13 +21,13 @@ class CyclicExecutivePlanner(Planner):
         try:
             secondary_period = max([x.compute_time for x in self.tasks])
         except ValueError as e:
-            logger.error("Tasks is empty")
+            logger.error("Provided tasks array is empty")
             secondary_period = 0
 
         while not self.validate_secondary_period(secondary_period):
             secondary_period += 1
             if secondary_period > self.hyperperiod:
-                raise Exception('Can not found a valid secondary period less or equal to hyperperiod')
+                raise Exception('Could not found a valid secondary period less or equal than hyperperiod')
         self.secondary_period = secondary_period
 
     def get_plan(self) -> ExecutionMatrix:

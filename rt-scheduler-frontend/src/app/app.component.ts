@@ -43,7 +43,11 @@ export class AppComponent {
       this.result = res;
     }, (err) => {
       console.log(err);
-      Swal.fire('Scheduler', 'El schedule no pudo realizarse', 'error');
+      let message = 'El schedule no pudo realizarse.';
+      if (err.error.message) {
+        message += '<br><b>' + err.error.message + '</b>';
+      }
+      Swal.fire('Scheduler', message, 'error');
     });
   }
 
@@ -66,6 +70,10 @@ export class AppComponent {
 
   deleteTask(task: Task): void {
     this.scheduler.tasks.splice(this.scheduler.tasks.indexOf(task), 1);
+  }
+
+  validParameters(): boolean {
+    return (this.scheduler.tasks.length > 0) && !!this.scheduler.planner;
   }
 
 }
