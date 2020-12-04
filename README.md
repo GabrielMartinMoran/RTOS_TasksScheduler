@@ -1,6 +1,7 @@
-
 # Sistemas de Tiempo Real - Tp Final
 **Gabriel Martín Moran y Oscar Andrés Arguello**
+
+![Diagrama de arquitectura](diagrama_arquitectura.jpg)
 
 ## Configuración de ambiente
 ### Back End Python
