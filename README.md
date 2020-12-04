@@ -24,14 +24,17 @@ En caso de querer modificar el Front End realizado en Angular 10, se deben segui
  1. Instalar ***nodejs***: https://nodejs.org/es/download/
  2. Instalar ***npm*** (en caso de que la version de ***nodejs*** no lo traiga por defecto)
  3. Instalar ***Angular***: https://cli.angular.io/
+ 4. Navegar al directorio **rt-scheduler-frontend** del repositorio y ejecutar el comando:
+
+	    npm install
  
 #### Instalación de dependencias
- 5. Navegar al directorio **rt-scheduler-frontend** del repositorio
- 6. Una vez en el directorio del proyecto de Angular, ejecutar el siguiente comando para iniciar el servidor de desarrollo:
+ 1. Navegar al directorio **rt-scheduler-frontend** del repositorio
+ 2. Una vez en el directorio del proyecto de Angular, ejecutar el siguiente comando para iniciar el servidor de desarrollo:
 
 	    ng serve
 
-3.  Una vez la aplicación haya compilado, abrir un browser y navegar a la URL: *http://localhost:4200*
+ 3. Cuando la aplicación haya compilado, abrir un browser y navegar a la URL: *http://localhost:4200*
 
 #### Compilación del Front End
 Cuando se hayan realizado los cambios deseados, para compilar el proyecto de Front End se debe ejecutar el comando:

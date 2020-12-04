@@ -17,7 +17,6 @@ class RateMonotonicPlanner(Planner):
 
     def get_plan(self) -> ExecutionMatrix:
         self.matrix = ExecutionMatrix(self.processors, self.hyperperiod)
-        print(f'Hyperperiod: {self.hyperperiod}')
         tasks_to_add = []
         for x in range(self.hyperperiod):
             for t in self.tasks:

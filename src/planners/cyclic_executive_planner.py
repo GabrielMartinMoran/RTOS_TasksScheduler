@@ -27,7 +27,7 @@ class CyclicExecutivePlanner(Planner):
         while not self.validate_secondary_period(secondary_period):
             secondary_period += 1
             if secondary_period > self.hyperperiod:
-                raise Exception('Invalid tasks to be planned')
+                raise Exception('Can not found a valid secondary period less or equal to hyperperiod')
         self.secondary_period = secondary_period
 
     def get_plan(self) -> ExecutionMatrix:
@@ -41,10 +41,19 @@ class CyclicExecutivePlanner(Planner):
                 if self.can_add_task(t, x):
                     processor.set_task(t)
                     break
+        if(not self.is_valid_matrix_result()):
+            raise Exception('Can not get a valid plan with provided tasks configuration')
         return self.matrix
 
+    def is_valid_matrix_result(self):
+        for task in self.tasks:
+            expected_times = int(task.compute_time * (self.hyperperiod / task.deadline))
+            scheduled_times = len(list(filter(lambda x: x == task, self.matrix.processors[0].time_units)))
+            if scheduled_times != expected_times:
+                return False
+        return True
+
     def can_add_task(self, task: Task, time: int):
-        #max_execution_times = self.hyperperiod / task.deadline
         last_executed_deadline = floor(self.matrix.get_last_time_task_started(task) / task.deadline)
         current_deadline = floor(time / task.deadline)        
         return task.compute_time <= self.calculate_remaining_sp_space(time) and (last_executed_deadline < current_deadline)

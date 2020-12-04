@@ -1,5 +1,5 @@
-from flask import Flask, request, send_from_directory, make_response
-from flask_restful import Api , abort
+from flask import Flask, request, send_from_directory, make_response, jsonify
+from flask_restful import Api
 from flask_cors import CORS
 from src.models.scheduller import Scheduler
 from src.models.task import Task
@@ -8,6 +8,7 @@ CLIENT_APP_FOLDER = '../client'
 APP_RUN_DEBUG_MODE = True
 APP_USE_RELOADER = False
 APP_PORT = 5000
+ERROR_RESPONSE_CODE = 400
 
 app = Flask(__name__)
 
@@ -21,7 +22,9 @@ def schedule():
         result = scheduler.schedule()
         return make_response(result.to_dict())
     except Exception as e:
-        return abort(400)
+        response = jsonify({'message': str(e)})
+        response.status_code = ERROR_RESPONSE_CODE
+        return response
 
 
 @app.route('/', methods=['GET'])

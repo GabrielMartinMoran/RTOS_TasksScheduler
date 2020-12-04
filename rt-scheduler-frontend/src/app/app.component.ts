@@ -17,7 +17,7 @@ export class AppComponent {
 
   PLANNERS: Planner[] = [
     {
-      name: 'Ejecutivo cíclico',
+      name: 'Ejecutivo cíclico (FIFO)',
       value: 'CYCLIC_EXECUTIVE',
       maxProcessors: 1
     },
@@ -43,7 +43,7 @@ export class AppComponent {
       this.result = res;
     }, (err) => {
       console.log(err);
-      Swal.fire('Scheduler', 'El schedule no pudo realizarse', 'error')
+      Swal.fire('Scheduler', 'El schedule no pudo realizarse', 'error');
     });
   }
 

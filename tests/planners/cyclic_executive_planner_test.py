@@ -84,8 +84,7 @@ def test_validate_secondary_period_returns_false_when_provided_sp_is_negative():
 
 
 def test_validate_secondary_period_returns_false_when_not_full_frame_from_task_start_to_task_deadline_for_each_task():
-    planner = CyclicExecutivePlanner(
-        [Task('T1', 30, 6), Task('T2', 20, 3), Task('T3', 120, 14)])
+    planner = CyclicExecutivePlanner([Task('T1', 30, 6), Task('T2', 20, 3), Task('T3', 120, 14)])
     assert not planner.validate_secondary_period(15)
 
 
@@ -97,15 +96,33 @@ def compare_each_processor_value(expected, processor):
             assert processor.time_units[x].name == expected[x]
 
 
+def test_get_plan_raises_exception_when_task_cannot_be_planned_correctly():
+    # Case 1
+    planner = CyclicExecutivePlanner([Task('T1', 5, 2), Task('T2', 10, 5), Task('T3', 5, 1)])
+    with pytest.raises(Exception):
+        planner.get_plan()
+    # Case 2
+    planner = CyclicExecutivePlanner([Task('T1', 6, 2), Task('T2', 4, 1), Task('T3', 10, 3)])
+    with pytest.raises(Exception):
+        planner.get_plan()
+
+
 def test_get_plan_returns_cyclic_executive_planified_matrix_when_tasks_are_valids():
     # Case 1
     planner = CyclicExecutivePlanner([Task('T1', 5, 2), Task('T2', 10, 3), Task('T3', 5, 1)])
     matrix = planner.get_plan()
-    expected = ['T1',  'T1',  'T3',  'T2', 'T2',  'T2',  'T1',  'T1',  'T3', '']
+    expected = ['T1',  'T1',  'T3',  'T2',
+                'T2',  'T2',  'T1',  'T1',  'T3', '']
     compare_each_processor_value(expected, matrix.processors[0])
     # Case 2
-    planner = CyclicExecutivePlanner([Task('T1', 6, 2), Task('T2', 4, 1), Task('T3', 10, 3)])
+    planner = CyclicExecutivePlanner([Task('T1', 6, 2), Task('T2', 5, 1), Task('T3', 10, 2)])
     matrix = planner.get_plan()
-    expected = ['T1',  'T1',  'T2',  '',  'T2',  'T3',  'T3',  'T3',  'T1',  'T1',  'T2',  '',  'T1',  'T1',  'T2',  '',  'T2',  'T3',  'T3',  'T3',  'T1',  'T1',  'T2',  '',  'T1',  'T1',  'T2',  '',  'T2',
-                'T3',  'T3',  'T3',  'T1',  'T1',  'T2',  '',  'T1',  'T1',  'T2',  '',  'T2',  'T3',  'T3',  'T3',  'T1',  'T1',  'T2',  '',  'T1',  'T1',  'T2',  '',  'T2',  'T3',  'T3',  'T3',  'T1',  'T1',  'T2',  '']
+    expected = ['T1', 'T1', 'T2', '', 'T3', 'T3', 'T1', 'T1', 'T2', '', 'T2', '', 'T1', 'T1',
+                'T3', 'T3', 'T2', '', 'T1', 'T1', 'T2', '', 'T3', 'T3', 'T1', 'T1', 'T2', '', '', '']
+    compare_each_processor_value(expected, matrix.processors[0])
+    # Case 3
+    planner = CyclicExecutivePlanner([Task('T1', 15, 3), Task('T2', 10, 2), Task('T3', 25, 5)])
+    matrix = planner.get_plan()
+    expected = ['T1', 'T1', 'T1', 'T2', 'T2', 'T3', 'T3', 'T3', 'T3', 'T3', 'T2', 'T2', '', '', '', 'T1', 'T1', 'T1', '', '', 'T2', 'T2', '', '', '', 'T3', 'T3', 'T3', 'T3', 'T3', 'T1', 'T1', 'T1', 'T2', 'T2', '', '', '', '', '', 'T2', 'T2', '', '', '', 'T1', 'T1', 'T1', '', '', 'T2', 'T2', '', '', '', 'T3', 'T3', 'T3', 'T3', 'T3', 'T1', 'T1', 'T1', 'T2', 'T2', '', '', '', '', '', 'T2', 'T2', '',
+                '', '', 'T1', 'T1', 'T1', '', '', 'T2', 'T2', '', '', '', 'T3', 'T3', 'T3', 'T3', 'T3', 'T1', 'T1', 'T1', 'T2', 'T2', '', '', '', '', '', 'T2', 'T2', '', '', '', 'T1', 'T1', 'T1', '', '', 'T2', 'T2', '', '', '', 'T3', 'T3', 'T3', 'T3', 'T3', 'T1', 'T1', 'T1', 'T2', 'T2', 'T3', 'T3', 'T3', 'T3', 'T3', 'T2', 'T2', '', '', '', 'T1', 'T1', 'T1', '', '', 'T2', 'T2', '', '', '', '', '', '', '', '']
     compare_each_processor_value(expected, matrix.processors[0])
