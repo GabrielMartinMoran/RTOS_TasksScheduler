@@ -1,5 +1,5 @@
 # Sistemas de Tiempo Real - Tp Final
-**Gabriel Martín Moran y Oscar Andrés Arguello**
+**Gabriel Martín Moran y Oscar Andrés Argueyo**
 
 ![Diagrama de arquitectura](diagrama_arquitectura.jpg)
 
