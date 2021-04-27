@@ -1,4 +1,5 @@
 # Sistemas de Tiempo Real - Tp Final
+## Programador de tareas para un sistema de tiempo real
 **Gabriel Martín Moran y Oscar Andrés Argueyo**
 
 ![Diagrama de arquitectura](diagrama_arquitectura.jpg)
